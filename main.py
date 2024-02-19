@@ -30,10 +30,18 @@ def stackoverflow(keyword):
         hit_num = hit_num[0:comma_index] + hit_num[comma_index+1:]
     return int(hit_num)
 
+engines = [qiita, zenn, stackoverflow]
+names = ["qiita", "zenn", "stackoverflow"]
+
+def search(keyword):
+    res = {}
+    for i in range(len(engines)):
+        hit_num = engines[i](keyword)
+        res[names[i]] = hit_num
+
+    return res
+
 if __name__ == "__main__":
-    qiita_hits = qiita("flask")
-    print(qiita_hits)
-    zenn_hits = zenn("flask")
-    print(zenn_hits)
-    sof = stackoverflow("flask")
-    print(sof)
+    keyword = "flask"
+    res = search(keyword)
+    print(res)
