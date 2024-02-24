@@ -34,14 +34,16 @@ engines = [qiita, zenn, stackoverflow]
 names = ["qiita", "zenn", "stackoverflow"]
 
 def search(keyword):
-    res = {}
-    for i in range(len(engines)):
-        hit_num = engines[i](keyword)
-        res[names[i]] = hit_num
-
+    res = []
+    for keyword in keywords:
+        tmp = {"keyword":keyword,"res":{}}
+        for i in range(len(engines)):
+            hit_num = engines[i](keyword)
+            tmp["res"][names[i]] = hit_num
+        res.append(tmp)
     return res
 
 if __name__ == "__main__":
-    keyword = "flask"
-    res = search(keyword)
+    keywords = ["flask","django"]
+    res = search(keywords)
     print(res)
